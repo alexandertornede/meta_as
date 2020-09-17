@@ -1,7 +1,9 @@
 import copy
 import logging
 import numpy as np
+import os
 from aslib_scenario.aslib_scenario import ASlibScenario
+from simple_runtime_metric import RuntimeMetric
 
 logger = logging.getLogger("evaluate_train_test_split")
 logger.addHandler(logging.StreamHandler())
@@ -32,31 +34,55 @@ def evaluate_train_test_split(scenario: ASlibScenario, approach, metrics, fold: 
     performance_data = test_scenario.performance_data.to_numpy()
     feature_cost_data = test_scenario.feature_cost_data.to_numpy() if test_scenario.feature_cost_data is not None else None
 
-    for instance_id in range(0, len(test_scenario.instances)):
+    instancewise_result_strings = list()
+    simple_runtime_metric = RuntimeMetric()
 
-        #logger.debug("Test instance " + str(instance_id) + "/" + str(len(test_scenario.instances)))
+    for instance_id in range(0, len(test_scenario.instances)):
 
         X_test = feature_data[instance_id]
         y_test = performance_data[instance_id]
 
+        # compute feature time
         accumulated_feature_time = 0
         if test_scenario.feature_cost_data is not None and approach.get_name() != 'sbs' and approach.get_name() != 'oracle':
             feature_time = feature_cost_data[instance_id]
             accumulated_feature_time = np.sum(feature_time)
 
+
+        #check if any algorithm solved the instance
         contains_non_censored_value = False
         for y_element in y_test:
             if y_element < test_scenario.algorithm_cutoff_time:
                 contains_non_censored_value = True
+
+        #compute the values of the different metrics
+        predicted_scores = approach.predict(X_test, instance_id)
         if contains_non_censored_value:
             num_counted_test_values += 1
-            predicted_scores = approach.predict(X_test, instance_id)
             for i, metric in enumerate(metrics):
                 runtime = metric.evaluate(y_test, predicted_scores, accumulated_feature_time, scenario.algorithm_cutoff_time)
                 approach_metric_values[i] = (approach_metric_values[i] + runtime)
+
+        # store runtimes on a per instance basis in ASLib format
+        runtime = simple_runtime_metric.evaluate(y_test, predicted_scores, accumulated_feature_time, scenario.algorithm_cutoff_time)
+        run_status_to_print = "ok" if runtime < scenario.algorithm_cutoff_time else "timeout"
+        line_to_store = test_scenario.instances[instance_id] + ",1," + approach.get_name() + "," + str(runtime) + "," + run_status_to_print
+        instancewise_result_strings.append(line_to_store)
+
+    write_instance_wise_results_to_file(instancewise_result_strings, scenario.scenario)
+
 
     approach_metric_values = np.true_divide(approach_metric_values, num_counted_test_values)
 
     print('PAR10: {0:.10f}'.format(approach_metric_values[0]))
 
     return approach_metric_values
+
+
+def write_instance_wise_results_to_file(instancewise_result_strings: list, scenario_name: str):
+    if not os.path.exists('output'):
+        os.makedirs('output')
+    complete_instancewise_result_string = '\n'.join(instancewise_result_strings)
+    f = open("output/" + scenario_name + ".arff", "a")
+    f.write(complete_instancewise_result_string + "\n")
+    f.close()

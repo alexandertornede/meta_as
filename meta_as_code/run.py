@@ -1,5 +1,5 @@
 import logging
-import sys
+import os
 import configparser
 import multiprocessing as mp
 import database_utils
@@ -17,6 +17,7 @@ from baselines.satzilla11 import SATzilla11
 from baselines.satzilla07 import SATzilla07
 from sklearn.linear_model import Ridge
 from par_10_metric import Par10Metric
+from simple_runtime_metric import RuntimeMetric
 from number_unsolved_instances import NumberUnsolvedInstances
 
 
@@ -25,6 +26,8 @@ logger.addHandler(logging.StreamHandler())
 
 
 def initialize_logging():
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
     logging.basicConfig(filename='logs/log_file.log', filemode='w',
                         format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 
@@ -85,6 +88,21 @@ def create_approach(approach_names):
     return approaches
 
 
+def postprocess_instance_wise_results():
+    directory = "output"
+    relevant_output_files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f.endswith('.arff')]
+    for file in relevant_output_files:
+        logger.info("Postprocessing output file " + str(file))
+        opened_file = open(file, 'r')
+        file_name = os.path.basename(opened_file.name).replace('.arff','')
+        header = "@RELATION ALGORITHM_RUNS_"+file_name+"\n\n@ATTRIBUTE instance_id STRING\n@ATTRIBUTE repetition NUMERIC\n@ATTRIBUTE algorithm STRING\n@ATTRIBUTE runtime NUMERIC\n@ATTRIBUTE runstatus {ok , timeout , memout , not_applicable , crash , other}\n\n@DATA\n"
+        file_content_sorted = ''.join(sorted(opened_file.readlines()))
+        writable_file = open(file, 'w')
+        writable_file.write(header + file_content_sorted)
+    logger.info("Postprocessed all output files.")
+
+
+
 #######################
 #         MAIN        #
 #######################
@@ -121,18 +139,21 @@ for fold in range(1, 11):
         for approach in approaches:
             metrics = list()
             metrics.append(Par10Metric())
+            metrics.append(RuntimeMetric())
             if approach.get_name() != 'oracle':
                 metrics.append(NumberUnsolvedInstances(False))
                 metrics.append(NumberUnsolvedInstances(True))
             logger.info("Submitted pool task for approach \"" +
                         str(approach.get_name()) + "\" on scenario: " + scenario)
-            pool.apply_async(evaluate_scenario, args=(scenario, approach, metrics,
-                                                      amount_of_scenario_training_instances, fold, config, tune_hyperparameters), callback=log_result)
+            # pool.apply_async(evaluate_scenario, args=(scenario, approach, metrics,
+            #                                           amount_of_scenario_training_instances, fold, config, tune_hyperparameters), callback=log_result)
 
-            #evaluate_scenario(scenario, approach, metrics,
-            #                 amount_of_scenario_training_instances, fold, config, tune_hyperparameters)
+            evaluate_scenario(scenario, approach, metrics,
+                             amount_of_scenario_training_instances, fold, config, tune_hyperparameters)
             print('Finished evaluation of fold')
 
 pool.close()
 pool.join()
+
+postprocess_instance_wise_results()
 logger.info("Finished all experiments.")
