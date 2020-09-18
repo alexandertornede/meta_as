@@ -49,9 +49,9 @@ def print_stats_of_scenario(scenario: ASlibScenario):
     logger.info("cutoff-time: " + str(scenario.algorithm_cutoff_time))
 
 
-def evaluate_scenario(scenario_name: str, approach, metrics, amount_of_training_scenario_instances: int, fold: int, db_config, tune_hyperparameters: bool):
+def evaluate_scenario(scenario_name: str, path_to_scenario_folder:str, approach, metrics, amount_of_training_scenario_instances: int, fold: int, db_config, tune_hyperparameters: bool):
     scenario = ASlibScenario()
-    scenario.read_scenario('data/aslib_data-master/' + scenario_name)
+    scenario.read_scenario(path_to_scenario_folder + scenario_name)
     print_stats_of_scenario(scenario)
     evaluate(scenario, approach, metrics, amount_of_training_scenario_instances, fold, db_config, tune_hyperparameters)
     return scenario_name

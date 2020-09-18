@@ -124,6 +124,7 @@ pool = mp.Pool(amount_of_cpus_to_use)
 
 
 scenarios = config["EXPERIMENTS"]["scenarios"].split(",")
+path_to_scenario_folder = config["EXPERIMENTS"]["data_folder"]
 approach_names = config["EXPERIMENTS"]["approaches"].split(",")
 amount_of_scenario_training_instances = int(
     config["EXPERIMENTS"]["amount_of_training_scenario_instances"])
@@ -145,10 +146,10 @@ for fold in range(1, 11):
                 metrics.append(NumberUnsolvedInstances(True))
             logger.info("Submitted pool task for approach \"" +
                         str(approach.get_name()) + "\" on scenario: " + scenario)
-            # pool.apply_async(evaluate_scenario, args=(scenario, approach, metrics,
+            # pool.apply_async(evaluate_scenario, args=(scenario, path_to_scenario_folder, approach, metrics,
             #                                           amount_of_scenario_training_instances, fold, config, tune_hyperparameters), callback=log_result)
 
-            evaluate_scenario(scenario, approach, metrics,
+            evaluate_scenario(scenario, path_to_scenario_folder, approach, metrics,
                              amount_of_scenario_training_instances, fold, config, tune_hyperparameters)
             print('Finished evaluation of fold')
 
