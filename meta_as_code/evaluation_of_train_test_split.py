@@ -49,19 +49,12 @@ def evaluate_train_test_split(scenario: ASlibScenario, approach, metrics, fold: 
             accumulated_feature_time = np.sum(feature_time)
 
 
-        #check if any algorithm solved the instance
-        contains_non_censored_value = False
-        for y_element in y_test:
-            if y_element < test_scenario.algorithm_cutoff_time:
-                contains_non_censored_value = True
-
         #compute the values of the different metrics
         predicted_scores = approach.predict(X_test, instance_id)
-        if contains_non_censored_value:
-            num_counted_test_values += 1
-            for i, metric in enumerate(metrics):
-                runtime = metric.evaluate(y_test, predicted_scores, accumulated_feature_time, scenario.algorithm_cutoff_time)
-                approach_metric_values[i] = (approach_metric_values[i] + runtime)
+        num_counted_test_values += 1
+        for i, metric in enumerate(metrics):
+            runtime = metric.evaluate(y_test, predicted_scores, accumulated_feature_time, scenario.algorithm_cutoff_time)
+            approach_metric_values[i] = (approach_metric_values[i] + runtime)
 
         # store runtimes on a per instance basis in ASLib format
         runtime = simple_runtime_metric.evaluate(y_test, predicted_scores, accumulated_feature_time, scenario.algorithm_cutoff_time)

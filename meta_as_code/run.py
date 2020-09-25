@@ -5,6 +5,7 @@ import multiprocessing as mp
 import database_utils
 from evaluation import evaluate_scenario
 from approaches.single_best_solver import SingleBestSolver
+from approaches.single_best_solver_with_feature_costs import SingleBestSolverWithFeatureCosts
 from approaches.oracle import Oracle
 from approaches.survival_forests.surrogate import SurrogateSurvivalForest
 from approaches.survival_forests.auto_surrogate import SurrogateAutoSurvivalForest
@@ -52,6 +53,8 @@ def create_approach(approach_names):
     for approach_name in approach_names:
         if approach_name == 'sbs':
             approaches.append(SingleBestSolver())
+        if approach_name == 'sbs_with_feature_costs':
+            approaches.append(SingleBestSolverWithFeatureCosts())
         if approach_name == 'oracle':
             approaches.append(Oracle())
         if approach_name == 'ExpectationSurvivalForest':

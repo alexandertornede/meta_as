@@ -32,7 +32,7 @@ def delete_algorithm_run_files_in_scenario_folder(scenario_folder: str):
             logger.info("Removing algorithm run files in meta-scenario " + str(folder))
             os.remove(algorithm_file_name)
 
-def replace_algorithms_in_meta_base_scenarios():
+def adapt_description_file_in_meta_base_scenarios():
     scenario_folders = get_all_scneario_folders(META_BASE_SCENARIO_FOLDER)
 
     algorithms = ["sbs", "per_algorithm_RandomForestRegressor_regressor", "multiclass_algorithm_selector",
@@ -42,7 +42,7 @@ def replace_algorithms_in_meta_base_scenarios():
     for folder in scenario_folders:
         logger.info("Replacing algorithms in meta-scenario " + str(folder))
 
-        #adapt description file
+        #adapt algorithm names in description file
         opened_file = open(os.path.join(folder, DESCRIPTION_FILE) , 'r')
         file_content = ''.join(opened_file.readlines())
         algorithm_info_part = "\n    configuration: ''\n" +"    deterministic: true\n"
@@ -53,6 +53,13 @@ def replace_algorithms_in_meta_base_scenarios():
         regex = 'metainfo_algorithms:.*\s(([^\S\r\n])+.*\s)*'
 
         file_content = re.sub(regex, "metainfo_algorithms:\n" + algorithm_string, file_content)
+
+        #adapt performance measures to runtime
+
+        regex = 'performance_measures:.*\s((-*[^\S\r\n])+.*\s)*'
+
+        file_content = re.sub(regex, "performance_measures:\n  - runtime\n", file_content)
+
 
         writable_file = open(os.path.join(folder, DESCRIPTION_FILE), 'w')
         writable_file.write(file_content)
@@ -96,6 +103,8 @@ def prepare_data_for_metalevel(meta_level:int):
 
     #remove oracle lines from copied algorithm run files
     remove_oracle_from_algorithm_runs_in_scenario_folder("data/level_" + str(meta_level))
+
+#adapt_description_file_in_meta_base_scenarios()
 
 prepare_data_for_metalevel(1)
 
