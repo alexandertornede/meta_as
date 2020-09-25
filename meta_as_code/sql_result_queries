@@ -1,0 +1,12 @@
+# VBS - Oracle Gap Level 0
+SELECT oracle_level_0.scenario_name, oracle_level_0.fold, oracle_result_level_0, sbs_result_level_0, sbs_result_level_0/oracle_result_level_0 FROM (SELECT scenario_name, fold, result as oracle_result_level_0 FROM `server_results_meta_level_0` WHERE approach="oracle" AND metric="par10") as oracle_level_0 JOIN (SELECT scenario_name, fold, result as sbs_result_level_0 FROM `server_results_meta_level_0` WHERE approach="sbs" AND metric="par10") as sbs_level_0 ON oracle_level_0.scenario_name = sbs_level_0.scenario_name AND oracle_level_0.fold = sbs_level_0.fold
+
+# VBS - Oracle Gap Level 1
+SELECT oracle_level_1.scenario_name, oracle_level_1.fold, oracle_result_level_1, sbs_result_level_1, sbs_result_level_1/oracle_result_level_1 FROM (SELECT scenario_name, fold, result as oracle_result_level_1 FROM `server_results_meta_level_1` WHERE approach="oracle" AND metric="par10") as oracle_level_1 JOIN (SELECT scenario_name, fold, result as sbs_result_level_1 FROM `server_results_meta_level_1` WHERE approach="sbs_with_feature_costs" AND metric="par10") as sbs_level_1 ON oracle_level_1.scenario_name = sbs_level_1.scenario_name AND oracle_level_1.fold = sbs_level_1.fold
+
+
+# First result table comparing changes in SBS, VBS and SBS/VBS GAP
+SELECT oracle_vbs_gap_level_0.scenario_name, oracle_vbs_gap_level_0.fold, oracle_vbs_gap_level_0.oracle_result_level_0, oracle_vbs_gap_level_1.oracle_result_level_1, oracle_vbs_gap_level_1.oracle_result_level_1 / oracle_vbs_gap_level_0.oracle_result_level_0 as oracle_level_1_div_oracle_level_0, oracle_vbs_gap_level_0.sbs_result_level_0, oracle_vbs_gap_level_1.sbs_result_level_1, oracle_vbs_gap_level_0.sbs_result_level_0/oracle_vbs_gap_level_1.sbs_result_level_1 as sbs_level_0_div_sbs_level_1, oracle_vbs_gap_level_0.sbs_result_level_0_div_oracle_result_level_0, oracle_vbs_gap_level_1.sbs_result_level_1_div_oracle_result_level_1  FROM `oracle_vbs_gap_level_0` JOIN `oracle_vbs_gap_level_1` ON oracle_vbs_gap_level_0.scenario_name = oracle_vbs_gap_level_1.scenario_name AND oracle_vbs_gap_level_0.fold = oracle_vbs_gap_level_1.fold
+
+# Aggregated first result table
+SELECT scenario_name, AVG(oracle_result_level_0), AVG(oracle_result_level_1), AVG(oracle_level_1_div_oracle_level_0), AVG(sbs_result_level_0), AVG(sbs_result_level_1), AVG(sbs_level_0_div_sbs_level_1), AVG(sbs_result_level_0_div_oracle_result_level_0), AVG(sbs_result_level_1_div_oracle_result_level_1) FROM `complete_sbs_vbs_and_gap_overview` GROUP BY scenario_name ORDER BY scenario_name
