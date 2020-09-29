@@ -21,7 +21,7 @@ def evaluate_train_test_split(scenario: ASlibScenario, approach, metrics, fold: 
         elif train_status == 'ignore_censored':
             train_scenario.performance_data = train_scenario.performance_data.replace(10*threshold, np.nan)
 
-    if approach.get_name() == 'oracle':
+    if approach.get_name() == 'oracle' or approach.get_name() == 'virtual_sbs_with_feature_costs':
         approach.fit(test_scenario, fold, amount_of_training_instances)
     else:
         approach.fit(train_scenario, fold, amount_of_training_instances)
