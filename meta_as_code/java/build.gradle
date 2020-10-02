@@ -1,0 +1,81 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+}
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+	   		srcDir 'src/example/java'
+        }
+        resources {
+        	srcDir 'conf'
+    	}
+    }
+	test {
+	   	java {
+	   		srcDir 'src/test/java'
+	   	}
+    }
+}
+
+//Java version
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {    
+    // include ailibs for compilation
+    compile ('ai.libs:jaicore-basic:0.2.3')
+    compile ('ai.libs:mlplan-weka:0.2.3')
+    
+	// logging
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	runtimeOnly group: 'org.slf4j', name:'slf4j-log4j12', version:'1.7.25'
+    
+    // Use JUnit5 test framework
+	testImplementation 'org.junit.platform:junit-platform-runner:1.7.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.3.1'
+	
+  	testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
+  	testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+  	testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.+'
+}
+
+
+configurations {
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://jitpack.io" }
+	maven { url "http://clojars.org/repo/" }
+	maven { url "https://plugins.gradle.org/m2/" }
+}
+
+test {
+    testLogging {
+        outputs.upToDateWhen {false}
+        showStandardStreams = true
+    }
+}
+
+eclipse {
+	project.natures "org.eclipse.buildship.core.gradleprojectnature"
+}
