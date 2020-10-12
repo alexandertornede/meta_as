@@ -18,6 +18,7 @@ import ai.libs.jaicore.basic.ValueUtil;
 import ai.libs.jaicore.basic.kvstore.KVStore;
 import ai.libs.jaicore.basic.kvstore.KVStoreCollection;
 import ai.libs.jaicore.basic.kvstore.KVStoreCollectionOneLayerPartition;
+import ai.libs.jaicore.basic.kvstore.KVStoreCollectionTwoLayerPartition;
 import ai.libs.jaicore.basic.kvstore.KVStoreSequentialComparator;
 import ai.libs.jaicore.basic.kvstore.KVStoreStatisticsUtil;
 import ai.libs.jaicore.basic.kvstore.KVStoreUtil;
@@ -78,27 +79,29 @@ public class TableGenerator {
 		KVStoreCollection baseApproaches = new KVStoreCollection();
 		col1.stream().filter(x -> !x.getAsString("approach").startsWith("l1")).forEach(baseApproaches::add);
 
-		KVStoreCollectionOneLayerPartition scenarioWiseBaseApproaches = new KVStoreCollectionOneLayerPartition("scenario_name", baseApproaches);
+		KVStoreCollectionTwoLayerPartition scenarioWiseBaseApproaches = new KVStoreCollectionTwoLayerPartition("approach", "scenario_name", baseApproaches);
 
 		KVStoreCollection metaApproaches = new KVStoreCollection();
 		col1.stream().filter(x -> x.getAsString("approach").startsWith("l1")).forEach(metaApproaches::add);
 
-		KVStoreCollectionOneLayerPartition partition = new KVStoreCollectionOneLayerPartition("scenario_name", metaApproaches);
+		KVStoreCollectionTwoLayerPartition partition = new KVStoreCollectionTwoLayerPartition("approach", "scenario_name", metaApproaches);
 
 		KVStoreCollection countData = new KVStoreCollection();
-		for (Entry<String, KVStoreCollection> partEntry : partition) {
-			KVStoreCollection baseCol = scenarioWiseBaseApproaches.getData().get(partEntry.getValue().get(0).getAsString("scenario_name"));
-			for (IKVStore metaStore : partEntry.getValue()) {
+		for (Entry<String, Map<String, KVStoreCollection>> metaPartEntry : partition) {
+			for (Entry<String, Map<String, KVStoreCollection>> basePartEntry : scenarioWiseBaseApproaches) {
 				int win = 0;
+				int tie = 0;
 				int loss = 0;
 
-				for (IKVStore baseStore : baseCol) {
+				for (String key : metaPartEntry.getValue().keySet()) {
+					IKVStore metaStore = metaPartEntry.getValue().get(key).get(0);
+					IKVStore baseStore = basePartEntry.getValue().get(key).get(0);
 					switch (metaStore.getAsDouble("tm_n_par10").compareTo(baseStore.getAsDouble("tm_n_par10"))) {
 					case -1:
 						win++;
 						break;
 					case 0:
-						win++;
+						tie++;
 						break;
 					case 1:
 						loss++;
@@ -107,20 +110,21 @@ public class TableGenerator {
 				}
 
 				IKVStore store = new KVStore();
-				store.put("approach", metaStore.getAsString("approach"));
-				store.put("scenario_name", metaStore.getAsString("scenario_name"));
-				store.put("win", win);
-				store.put("loss", loss);
-				store.put("entry", win + "/" + loss);
-				countData.add(store);
+				store.put("meta_approach", metaPartEntry.getKey());
+				store.put("base_approach", basePartEntry.getKey());
 
-				metaStore.put("statistics", win + "/" + loss);
+				store.put("win", win);
+				store.put("tie", tie);
+				store.put("loss", loss);
+
+				store.put("entry", win + "/" + tie + "/" + loss);
+				countData.add(store);
 			}
 		}
 
 		System.out.println("#####");
 		countData.sort(new KVStoreSequentialComparator("scenario_name", "approach"));
-		System.out.println(KVStoreUtil.kvStoreCollectionToLaTeXTable(countData, "scenario_name", "approach", "entry"));
+		System.out.println(KVStoreUtil.kvStoreCollectionToLaTeXTable(countData, "base_approach", "meta_approach", "entry"));
 
 		KVStoreCollectionOneLayerPartition meanWTLStats = new KVStoreCollectionOneLayerPartition("approach", countData);
 		for (Entry<String, KVStoreCollection> entry : meanWTLStats) {
