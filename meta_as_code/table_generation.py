@@ -20,10 +20,10 @@ def generate_sbs_vbs_change_plots(small_scenarios:bool):
     scenarios_to_remove.append('GRAPHS-2015')
     for scenario in scenarios_to_remove:
         dataframe = dataframe.drop(dataframe[dataframe['scenario_name'] == scenario].index)
-    ax = dataframe.plot(kind='bar', x='scenario_name', figsize=(15,6))
+    ax = dataframe.plot(kind='bar', x='scenario_name', figsize=(15,6), color=['#6ed95f','#29871c','#838dfc','#2230c9']) #RdYlBu
     ax.set_xlabel("Scenario")
     ax.set_ylabel("PAR10")
-    ax.legend(['oracle', 'meta-oracle', 'sbs', 'meta-sbs'])
+    ax.legend(['oracle', 'AS-oracle', 'SBS', 'SBAS'])
     vals = ax.get_yticks()
     for tick in vals:
         ax.axhline(y=tick, linestyle='dashed', alpha=0.4, color='#6d6e6d', zorder=1)
