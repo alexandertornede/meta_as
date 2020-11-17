@@ -86,7 +86,7 @@ The results obtained this way are (among others) PAR10 scores (not yet normalize
 
 After having generated the main results for the meta-level, you also have to generate the results for the base-level by running the code on the original ASlib scenarios. For doing so, change  the `table` name in the configuration file (in order to avoid an overwrite) to another value and the `data_folder` to the folder where you downloaded the original ASlib data to. Furthermore, in the `approaches` part of the configuration, you should replace the `sbs_with_feature_costs` simply by `sbs`. Now you have to rerun the experiments to obtain the same table structure as described above.
 
-At this point, you should have both the results for the base-level (we will call the corresponding results table `results_base`) and for the meta-level (we will call the corresponding result table `results_meta`). In the following, you have to perform some data wrangling in order to generate the results presented in the paper.
+At this point, you should have both the results for the base-level (we will call the corresponding results table `server_results_meta_level_0`) and for the meta-level (we will call the corresponding result table `server_results_meta_level_1`). In the following, you have to perform some data wrangling in order to generate the results presented in the paper.
 
 ### SQL Table Preparation
 In order to generate the tables and plots presented in the paper, we ask you to create the following views in your SQL table: 
