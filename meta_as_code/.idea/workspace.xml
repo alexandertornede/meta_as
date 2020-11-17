@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de1f990b-58c4-4b7a-bff0-b0889c5d01b5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/run2survive_normalized_par10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/schmee_normalized_par10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/schmee_unsolved.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/setting_comparison_normalized_par10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/setting_comparison_unsolved.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/unsolved_final.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/visualization.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/table_generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_generation.py" afterDir="false" />
     </list>
     <ignored path="data/" />
     <ignored mask="*.simg" />
@@ -16,23 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/meta_aslib_preparation.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plot_generation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/table_generation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+            <state relative-caret-position="630">
+              <caret line="42" column="53" lean-forward="true" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -40,23 +37,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sql_result_queries">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/experiment_configuration.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="225">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/approaches/virtual_single_best_solver.py">
+        <entry file="file://$PROJECT_DIR$/sql_result_queries">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="5" column="45" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#55#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="8" column="28" selection-start-line="8" selection-end-line="8" selection-end-column="836" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/simple_runtime_metric.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="109" selection-start-line="5" selection-start-column="109" selection-end-line="5" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -76,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
+            <state relative-caret-position="1114">
               <caret line="160" selection-start-line="160" selection-end-line="160" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -167,6 +170,7 @@
       <find>scenario</find>
       <find>oracle</find>
       <find>15-PuzzleCompetition/15-puzzle.init6.gz</find>
+      <find>RESULT_TABLE_LEVEL_1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -228,8 +232,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="26" />
-    <option name="y" value="155" />
+    <option name="x" value="4" />
+    <option name="y" value="140" />
     <option name="width" value="2560" />
     <option name="height" value="1417" />
   </component>
@@ -241,6 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -282,13 +287,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -422,7 +426,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/table_generation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_generation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -532,6 +536,7 @@
       <workItem from="1601883887946" duration="237000" />
       <workItem from="1602664935919" duration="94000" />
       <workItem from="1602665066318" duration="258000" />
+      <workItem from="1605620681438" duration="1455000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1581352369900</created>
@@ -544,13 +549,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252310000" />
+    <option name="totallyTimeSpent" value="253765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1417" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8996226" visible="true" weight="0.2426529" />
-      <window_info id="Structure" order="1" sideWeight="0.10037736" side_tool="true" visible="true" weight="0.2426529" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8988679" visible="true" weight="0.2446386" />
+      <window_info id="Structure" order="1" sideWeight="0.10113207" side_tool="true" visible="true" weight="0.2446386" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32830188" />
@@ -569,7 +575,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" sideWeight="0.4973585" weight="0.2640985" />
-      <window_info active="true" anchor="right" id="SciView" order="3" sideWeight="0.85126966" visible="true" weight="0.10881652" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.85126966" visible="true" weight="0.10881652" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" x="0" y="0" width="590" height="1217" id="Documentation" order="5" sideWeight="0.5026415" side_tool="true" weight="0.2640985" />
     </layout>
@@ -746,13 +752,6 @@
     <entry file="file://$PROJECT_DIR$/data/level_1/QBF-2016/description.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/simple_runtime_metric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="109" selection-start-line="5" selection-start-column="109" selection-end-line="5" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/meta_base/MIP-2016/description.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -772,13 +771,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/meta_base/ASP-POTASSCO/algorithm_runs.arff">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/experiment_configuration.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="8" selection-start-line="4" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/level_1/CSP-Minizinc-Time-2016/algorithm_runs.arff">
       <provider selected="true" editor-type-id="text-editor" />
@@ -824,16 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/table_generation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/approaches/virtual_single_best_solver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -850,16 +832,6 @@
           <caret line="23" column="96" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="96" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="160" selection-start-line="160" selection-end-line="160" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -901,10 +873,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/conf/experiment_configuration.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1114">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sql_result_queries">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="120">
+          <caret line="8" column="28" selection-start-line="8" selection-end-line="8" selection-end-column="836" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simple_runtime_metric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="109" selection-start-line="5" selection-start-column="109" selection-end-line="5" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot_generation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="53" lean-forward="true" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

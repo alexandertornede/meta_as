@@ -2,9 +2,6 @@ import configparser
 import pandas as pd
 import matplotlib.pyplot as plt
 
-RESULT_TABLE_LEVEL_0 = "server_results_meta_level_0"
-RESULT_TABLE_LEVEL_1 = "server_results_meta_level_1_new"
-
 
 def load_configuration():
     config = configparser.ConfigParser()
