@@ -111,7 +111,25 @@ In order to generate the tables and plots presented in the paper, we ask you to 
 With the database views created as described above, you can simply run the `plot_generation.py` at the top-level of the project in order to obtain Figure 2 from the paper. 
 
 ### Generating Tables
-TODO Marcel
+If you want to re-generate the tables presented in the paper, navigate to the java folder: 
+````shell
+cd meta_as_code/java/
+````
+There you will find a gradle wrapper file as well as files containing database dumps ``table-data.kvcol`` and ``table2-data.kvcol``. In order to generate LaTeX tables run
+
+````shell
+./gradlew generateTables
+````
+
+if you are running a Linux or Mac OS and 
+
+````shell
+.\gradlew generateTables
+````
+if you have a Windows system. Running the command will result in three output files:  ``base-table.tex``,``win-tie-loss-stats.tex``, and ``meta-table.tex`` corresponding to Tables 1,2, and 3 respectively.
+
+In case you want to generate tables from an existing database, you need to configure the ``database.properties`` file with the connection details and set the config constant ``LOAD_FROM_DB`` (``src/main/java/TableGenerator.java``) from ``false`` to ``true``.
+
 
 ## 5. Generating Scenarios for a new meta-level
 This part will most likely not be interesting for you and is only intended for developers: 
