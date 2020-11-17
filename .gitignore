@@ -22,7 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-data
 __pycache__
 ASlibScenario-master
 meta_as_code/conf/experiment_configuration.cfg
