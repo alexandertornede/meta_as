@@ -15,7 +15,7 @@ Please cite this work as
 ## Abstract
 Instance-specific algorithm selection (AS) deals with the automatic selection of an algorithm from a fixed set of candidates most suitable for a specific instance of an algorithmic problem class, where “suitability” often refers to an algorithm’s runtime. Over the past years, a plethora of algorithm selectors have been proposed. As an algorithm selector is again an algorithm solving a specific problem, the idea of algorithm selection could also be applied to AS algorithms, leading to a meta-AS approach:  Given an instance, the goal is to select an algorithm selector, which is then used to select the actual algorithm for solving the problem instance.  We elaborate on consequences of applying AS on a meta-level and identify possible problems. Empirically, we show that meta-algorithm-selection can indeed prove beneficial in some cases.  In general, however, successful AS approaches have problems with solving the meta-level problem.
 
-## Execution Details (Getting the Code To Run)
+## Execution Details (Getting the Code to Run)
 For the sake of reproducibility, we will detail how to reproduce the results presented in the paper below.
 
 ## 1. Configuration
@@ -131,10 +131,10 @@ if you have a Windows system. Running the command will result in three output fi
 In case you want to generate tables from an existing database, you need to configure the ``database.properties`` file with the connection details and set the config constant ``LOAD_FROM_DB`` (``src/main/java/TableGenerator.java``) from ``false`` to ``true``.
 
 
-## 5. Generating Scenarios for a new meta-level
+## 5. Generating Scenarios for a New Meta-level
 This part will most likely not be interesting for you and is only intended for developers: 
 
-### Start experiments for meta-level N
+### Start Experiments for Meta-level N
 1. Copy results for meta-level N-1 from the "output" folder on the server into a new subdirectory in output named "level_{N-1}".
 2. Change "data_folder" in "conf/experiment_configuration" to "data/level_N/"
 2. Change "table" in "conf/experiment_configuration" to "server_results_meta_level_N"
